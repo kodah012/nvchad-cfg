@@ -10,6 +10,15 @@ M.ui = {
 
   hl_override = highlights.override,
   hl_add = highlights.add,
+
+  statusline = {
+    theme = "minimal",
+    separator_style = "round"
+  },
+
+  nvdash = {
+    load_on_startup = true,
+  }
 }
 
 M.plugins = "custom.plugins"
