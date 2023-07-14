@@ -38,6 +38,32 @@ local plugins = {
     "nvim-tree/nvim-tree.lua",
     opts = overrides.nvimtree,
   },
+  {
+    "hrsh7th/nvim-cmp",
+    opts = function()
+      local cmp = require "cmp"
+      local M = require "plugins.configs.cmp"
+      table.insert(M.sources, { name = "crates" })
+      M.mapping["<CR>"] = cmp.mapping {
+        i = function(fallback)
+          if cmp.visible() and cmp.get_active_entry() then
+            cmp.confirm {
+              behavior = cmp.ConfirmBehavior.Replace,
+              select = false,
+            }
+          else
+            fallback()
+          end
+        end,
+        s = cmp.mapping.confirm { select = true },
+        c = cmp.mapping.confirm {
+          behavior = cmp.ConfirmBehavior.Replace,
+          select = true,
+        },
+      }
+      return M
+    end,
+  },
 
   -- Install a plugin
   {
@@ -79,14 +105,6 @@ local plugins = {
       local crates = require "crates"
       crates.setup(opts)
       crates.show()
-    end,
-  },
-  {
-    "hrsh7th/nvim-cmp",
-    opts = function()
-      local M = require "plugins.configs.cmp"
-      table.insert(M.sources, { name = "crates" })
-      return M
     end,
   },
   --------------------------------
