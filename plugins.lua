@@ -22,6 +22,12 @@ local plugins = {
       require "custom.configs.lspconfig"
     end, -- Override to setup mason-lspconfig
   },
+  {
+    "hrsh7th/nvim-cmp",
+    opts = function()
+      return require "custom.configs.cmp"
+    end,
+  },
 
   -- override plugin configs
   {
@@ -37,71 +43,6 @@ local plugins = {
   {
     "nvim-tree/nvim-tree.lua",
     opts = overrides.nvimtree,
-  },
-  {
-    "hrsh7th/nvim-cmp",
-    opts = function()
-      local has_words_before = function()
-        unpack = unpack or table.unpack
-        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
-      end
-      local luasnip = require "luasnip"
-      local cmp = require "cmp"
-
-      local M = require "plugins.configs.cmp"
-
-      M.preselect = cmp.PreselectMode.None
-      M.completion = {
-        completeopt = "menu,menuone,noinsert,noselect",
-      }
-
-      table.insert(M.sources, { name = "crates" })
-
-      M.mapping["<CR>"] = cmp.mapping {
-        i = function(fallback)
-          if cmp.visible() and cmp.get_active_entry() then
-            cmp.confirm {
-              behavior = cmp.ConfirmBehavior.Replace,
-              select = false,
-            }
-          else
-            fallback()
-          end
-        end,
-        s = cmp.mapping.confirm { select = true },
-        c = cmp.mapping.confirm {
-          behavior = cmp.ConfirmBehavior.Replace,
-          select = true,
-        },
-      }
-
-      M.mapping["<Tab>"] = cmp.mapping(function(fallback)
-        if cmp.visible() then
-          cmp.select_next_item()
-        -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
-        -- they way you will only jump inside the snippet region
-        elseif luasnip.expand_or_jumpable() then
-          luasnip.expand_or_jump()
-        elseif has_words_before() then
-          cmp.complete()
-        else
-          fallback()
-        end
-      end, { "i", "s" })
-
-      M.mapping["<S-Tab>"] = cmp.mapping(function(fallback)
-        if cmp.visible() then
-          cmp.select_prev_item()
-        elseif luasnip.jumpable(-1) then
-          luasnip.jump(-1)
-        else
-          fallback()
-        end
-      end, { "i", "s" })
-
-      return M
-    end,
   },
 
   -- Install a plugin
