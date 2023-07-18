@@ -5,8 +5,8 @@ M.general = {
   n = {
     --[";"] = { ":", "enter command mode", opts = { nowait = true } },
     ["J"] = { "mzJ`z", "Append next line to current" },
-    ["<C-k>"] = { "<cmd>cnext<CR>zz", "Next quickfix" },
-    ["<C-j>"] = { "<cmd>cprev<CR>zz", "Prev quickfix" },
+    ["<leader><C-k>"] = { "<cmd>cnext<CR>zz", "Next quickfix" },
+    ["<leader><C-j>"] = { "<cmd>cprev<CR>zz", "Prev quickfix" },
     ["<leader>k"] = { "<cmd>lnext<CR>zz", "Next location" },
     ["<leader>j"] = { "<cmd>lprev<CR>zz", "Prev location" },
     ["<leader>s"] = {
