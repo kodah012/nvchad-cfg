@@ -44,6 +44,10 @@ local plugins = {
     "nvim-tree/nvim-tree.lua",
     opts = overrides.nvimtree,
   },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    enabled = false,
+  },
 
   -- Install a plugin
   {
@@ -117,6 +121,14 @@ local plugins = {
       dap.listeners.before.event_exited["dapui_config"] = function()
         dapui.close()
       end
+    end,
+  },
+  {
+    "echasnovski/mini.nvim",
+    branch = "stable",
+    init = function()
+      require("mini.animate").setup()
+      require("mini.indentscope").setup()
     end,
   },
 
