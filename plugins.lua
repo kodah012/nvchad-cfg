@@ -127,8 +127,22 @@ local plugins = {
     "echasnovski/mini.nvim",
     branch = "stable",
     init = function()
-      require("mini.animate").setup()
-      require("mini.indentscope").setup()
+      local animate = require "mini.animate"
+      animate.setup {
+        cursor = {
+          timing = animate.gen_timing.quadratic {
+            duration = 10,
+          },
+        },
+      }
+
+      local indentscope = require "mini.indentscope"
+      indentscope.setup {
+        draw = {
+          animation = indentscope.gen_animation.linear(),
+          duration = 10,
+        },
+      }
     end,
   },
 
