@@ -43,6 +43,9 @@ M.mason = {
 
     -- rust stuff
     "rust-analyzer",
+
+    -- wgsl
+    "wgsl-analyzer",
   },
 }
 
