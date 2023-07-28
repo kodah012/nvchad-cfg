@@ -91,8 +91,7 @@ local plugins = {
       crates.show()
     end,
   },
-  --------------------------------
-  ----- C++ related plugins -----
+
   {
     "jay-babu/mason-nvim-dap.nvim",
     event = "VeryLazy",
@@ -123,6 +122,7 @@ local plugins = {
       end
     end,
   },
+
   {
     "echasnovski/mini.nvim",
     branch = "stable",
@@ -135,6 +135,10 @@ local plugins = {
         },
       })
     end,
+  },
+  {
+    "folke/trouble.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
   },
 
   -- To make a plugin not be loaded
