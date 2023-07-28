@@ -1,4 +1,4 @@
-local overrides = require "custom.configs.overrides"
+local overrides = require("custom.configs.overrides")
 
 ---@type NvPluginSpec[]
 local plugins = {
@@ -13,19 +13,19 @@ local plugins = {
         "jose-elias-alvarez/null-ls.nvim",
         event = "VeryLazy",
         opts = function()
-          return require "custom.configs.null-ls"
+          return require("custom.configs.null-ls")
         end,
       },
     },
     config = function()
-      require "plugins.configs.lspconfig"
-      require "custom.configs.lspconfig"
+      require("plugins.configs.lspconfig")
+      require("custom.configs.lspconfig")
     end, -- Override to setup mason-lspconfig
   },
   {
     "hrsh7th/nvim-cmp",
     opts = function()
-      return require "custom.configs.cmp"
+      return require("custom.configs.cmp")
     end,
   },
 
@@ -70,7 +70,7 @@ local plugins = {
     ft = "rust",
     dependencies = "neovim/nvim-lspconfig",
     opts = function()
-      return require "custom.configs.rust-tools"
+      return require("custom.configs.rust-tools")
     end,
     config = function(_, opts)
       require("rust-tools").setup(opts)
@@ -79,14 +79,14 @@ local plugins = {
   {
     "mfussenegger/nvim-dap",
     config = function(_, _)
-      require("core.utils").load_mappings "dap"
+      require("core.utils").load_mappings("dap")
     end,
   },
   {
     "saecki/crates.nvim",
     ft = { "rust", "toml" },
     config = function(_, opts)
-      local crates = require "crates"
+      local crates = require("crates")
       crates.setup(opts)
       crates.show()
     end,
@@ -109,8 +109,8 @@ local plugins = {
     event = "VeryLazy",
     dependencies = "mfussenegger/nvim-dap",
     config = function()
-      local dap = require "dap"
-      local dapui = require "dapui"
+      local dap = require("dap")
+      local dapui = require("dapui")
       dapui.setup()
       dap.listeners.after.event_initialized["dapui_config"] = function()
         dapui.open()
@@ -127,22 +127,13 @@ local plugins = {
     "echasnovski/mini.nvim",
     branch = "stable",
     init = function()
-      local animate = require "mini.animate"
-      animate.setup {
-        cursor = {
-          timing = animate.gen_timing.quadratic {
-            duration = 10,
-          },
-        },
-      }
-
-      local indentscope = require "mini.indentscope"
-      indentscope.setup {
+      local indentscope = require("mini.indentscope")
+      indentscope.setup({
         draw = {
           animation = indentscope.gen_animation.linear(),
-          duration = 10,
+          duration = 5,
         },
-      }
+      })
     end,
   },
 

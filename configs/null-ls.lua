@@ -11,7 +11,7 @@ local opts = {
   sources = {
     -- webdev stuff
     b.formatting.deno_fmt, -- choosed deno for ts/js files cuz its very fast!
-    b.formatting.prettier.with { filetypes = { "html", "markdown", "css" } }, -- so prettier works only on these filetypes
+    b.formatting.prettier.with({ filetypes = { "html", "markdown", "css" } }), -- so prettier works only on these filetypes
 
     -- Lua
     b.formatting.stylua,
@@ -19,12 +19,14 @@ local opts = {
     -- cpp
     b.formatting.clang_format,
   },
-  on_attach = function (client, bufnr)
+  on_attach = function(client, bufnr)
     if client.supports_method("textDocument/formatting") then
       vim.api.nvim_clear_autocmds({
         group = augroup,
         buffer = bufnr,
       })
+      --[[
+      -- Autoformatting
       vim.api.nvim_create_autocmd("BufWritePre", {
         group = augroup,
         buffer = bufnr,
@@ -32,6 +34,7 @@ local opts = {
           vim.lsp.buf.format({bufnr = bufnr})
         end
       })
+      --]]
     end
   end,
 }

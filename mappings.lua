@@ -3,7 +3,6 @@ local M = {}
 
 M.general = {
   n = {
-    --[";"] = { ":", "enter command mode", opts = { nowait = true } },
     ["J"] = { "mzJ`z", "Append next line to current" },
     ["<leader><C-k>"] = { "<cmd>cnext<CR>zz", "Next quickfix" },
     ["<leader><C-j>"] = { "<cmd>cprev<CR>zz", "Prev quickfix" },
@@ -15,8 +14,8 @@ M.general = {
     },
   },
   v = {
-    ["J"] = { ":m '>+1<CR>gv=gv", "Move lines down" },
-    ["K"] = { ":m '<-2<CR>gv=gv", "Move lines up" },
+    ["J"] = { ":m '>+1<CR>gv=gv", "Move line(s) down" },
+    ["K"] = { ":m '<-2<CR>gv=gv", "Move line(s) up" },
   },
   x = {
     ["<leader>p"] = { '"_dP', "Paste and replace" },
@@ -38,7 +37,7 @@ M.dap = {
     },
     ["<leader>dus"] = {
       function()
-        local widgets = require "dap.ui.widgets"
+        local widgets = require("dap.ui.widgets")
         local sidebar = widgets.sidebar(widgets.scopes)
         sidebar.open()
       end,

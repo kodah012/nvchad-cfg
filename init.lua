@@ -7,6 +7,7 @@ local autocmd = vim.api.nvim_create_autocmd
 -- })
 
 vim.opt.colorcolumn = "80"
+vim.wo.relativenumber = true
 
 autocmd({ "BufNewFile", "BufRead" }, {
   pattern = { "*.wgsl" },
