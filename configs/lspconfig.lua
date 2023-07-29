@@ -17,10 +17,13 @@ end
 --
 -- lspconfig.pyright.setup { blabla}
 
+local clangd_capabilities = capabilities
+clangd_capabilities.textDocument.semanticHighlighting = true
+clangd_capabilities.offsetEncoding = "utf-8"
 lspconfig.clangd.setup({
   on_attach = function(client, bufnr)
     client.server_capabilities.signatureHelpProvider = false
     on_attach(client, bufnr)
   end,
-  capabilities = capabilities,
+  capabilities = clangd_capabilities,
 })
