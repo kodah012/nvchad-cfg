@@ -1,10 +1,32 @@
-local on_attach = require("plugins.configs.lspconfig").on_attach
-local capabilities = require("plugins.configs.lspconfig").capabilities
-
 local options = {
+  on_attach = function(_, bufnr)
+    local rt = require("rust-tools")
+    -- Hover actions
+    vim.keymap.set(
+      "n",
+      "<C-space>",
+      rt.hover_actions.hover_actions,
+      { buffer = bufnr }
+    )
+    vim.keymap.set(
+      "n",
+      "<leader>a",
+      rt.code_action_group.code_action_group,
+      { buffer = bufnr }
+    )
+  end,
   server = {
-    on_attach = on_attach,
-    capabilities = capabilities,
+    settings = {
+      ["rust-analyzer"] = {
+        checkOnSave = {
+          enable = true,
+          command = "clippy",
+        },
+        cargo = {
+          allFeatures = true,
+        },
+      },
+    },
   },
 }
 

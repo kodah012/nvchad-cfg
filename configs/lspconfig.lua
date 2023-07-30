@@ -5,6 +5,7 @@ local lspconfig = require("lspconfig")
 local util = require("lspconfig/util")
 
 -- if you just want default config for the servers then put them in a table
+-- WARNING: do NOT set up rust_analyzer because rust-tools.nvim already handles that
 local servers = { "html", "cssls", "tsserver", "wgsl_analyzer", "glslls" }
 
 for _, lsp in ipairs(servers) do
