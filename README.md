@@ -1,4 +1,6 @@
-# NvChad Config
+# Old NvChad Config
+
+No longer updated
 
 ## Getting Started
 
